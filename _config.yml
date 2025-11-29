@@ -40,7 +40,7 @@ collections:
     permalink: /:collection/:name
   test:
     output: true
-    permalink: /:categories/:year/:month/:day/:name/
+    permalink: /:categories/:name
 
 # BUILD SETTINGS
 sass:
