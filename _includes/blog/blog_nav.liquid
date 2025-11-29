@@ -1,41 +1,55 @@
-{% if paginator.total_pages > 1 %}
+{% assign all_posts = site.posts | concat: site.test | sort: 'date' | reverse %}
+{% assign total_posts = all_posts.size %}
+{% assign total_pages = total_posts | divided_by: paginator.per_page | plus: 1 %}
+{% if total_pages > 1 %}
 <div class="pagination" data-testid="blog-pagination">
     <div class="previous">
-        
-        {% if paginator.previous_page and paginator.previous_page != 1%}
+        {% assign prev_page = paginator.page | minus: 1 %}
+        {% if prev_page > 0 %}
+        {% if prev_page > 1 %}
         <!-- << -->
         <a aria-label="{{ site.data.language.str_previous_page | default: 'Prev' }}" href="{{ '/' | relative_url }}" class="button">
             <span><i class="fas fa-angle-double-left"></i></span>
         </a>
         {% endif %}
-        
         <!-- < previous -->
-        <a aria-label="{{ site.data.language.str_previous_page | default: 'Prev' }}" href="{{ paginator.previous_page_path | relative_url }}"
-           {% unless paginator.previous_page %}style="visibility:hidden"{% endunless %} class="button">
+        <a aria-label="{{ site.data.language.str_previous_page | default: 'Prev' }}" href="{% if prev_page == 1 %}{{ '/' | relative_url }}{% else %}{{ site.paginate_path | relative_url | replace: ':num', prev_page }}{% endif %}" class="button">
             <span><i class="fas fa-chevron-left"></i></span>
             {{ site.data.language.str_previous_page | default: "Prev" }}
         </a>
+        {% else %}
+        <span style="visibility:hidden" class="button">
+            <span><i class="fas fa-chevron-left"></i></span>
+            {{ site.data.language.str_previous_page | default: "Prev" }}
+        </span>
+        {% endif %}
     </div>
 
     <div class="page_number">
-        {{ paginator.page }} / {{ paginator.total_pages }}
+        {{ paginator.page }} / {{ total_pages }}
     </div>
 
     <div class="next">
-        
+        {% assign next_page = paginator.page | plus: 1 %}
+        {% if next_page <= total_pages %}
         <!-- next > -->
-        <a aria-label="{{ site.data.language.str_next_page | default: 'Next' }}" href="{{ paginator.next_page_path | relative_url }}"
-           {% unless paginator.next_page %}style="visibility:hidden"{% endunless %} class="button">
+        <a aria-label="{{ site.data.language.str_next_page | default: 'Next' }}" href="{{ site.paginate_path | relative_url | replace: ':num', next_page }}" class="button">
             {{ site.data.language.str_next_page | default: "Next" }}
             <span><i class="fas fa-chevron-right"></i></span>
         </a>
 
-        {% if paginator.next_page and paginator.next_page != paginator.total_pages %}
+        {% if next_page < total_pages %}
         <!-- >> -->
         <a aria-label="{{ site.data.language.str_next_page | default: 'Next' }}"
-        href="{{ site.paginate_path | relative_url | replace: ':num', paginator.total_pages }}" class="button">
+        href="{{ site.paginate_path | relative_url | replace: ':num', total_pages }}" class="button">
             <span><i class="fas fa-angle-double-right"></i></span>
         </a>
+        {% endif %}
+        {% else %}
+        <span style="visibility:hidden" class="button">
+            {{ site.data.language.str_next_page | default: "Next" }}
+            <span><i class="fas fa-chevron-right"></i></span>
+        </span>
         {% endif %}
         
     </div>

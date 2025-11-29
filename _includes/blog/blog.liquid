@@ -1,8 +1,12 @@
 <div class="posts" data-testid="blog-posts">
-    {% unless paginator.posts %}
+    {% assign all_posts = site.posts | concat: site.test | sort: 'date' | reverse %}
+    {% assign start_index = paginator.page | minus: 1 | times: paginator.per_page %}
+    {% assign end_index = start_index | plus: paginator.per_page | minus: 1 %}
+    {% assign paginated_posts = all_posts | slice: start_index, paginator.per_page %}
+    {% unless paginated_posts.size > 0 %}
     <article><section class="post-content"><p>There are no blog posts</p></section></article>
     {% endunless %}
-    {% for post in paginator.posts %}
+    {% for post in paginated_posts %}
     <div class="post-teaser" data-testid="blog-post-teaser">
         {% if post.thumbnail %}
         <div class="post-img">
