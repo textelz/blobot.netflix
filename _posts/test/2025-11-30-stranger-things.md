@@ -1,7 +1,6 @@
 ---
 layout: post
-title: >
-    Blogging with title 
+title: 넷플릭스 추천작 리뷰 — 기묘한 이야기 (Stranger Things)
 tags: [Test, Image]
 categories: test
 ---
