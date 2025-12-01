@@ -38,7 +38,7 @@ collections:
   portfolio:
     output: true
     permalink: /:collection/:name
-  2016:
+  _2016:
     output: true
     permalink: /:collection/:name
 
