@@ -1,4 +1,8 @@
-{% assign all_posts = site.posts | concat: site.test | sort: 'date' | reverse %}
+{% assign all_posts = site.posts %}
+{% if site.air2016 and site.air2016.size > 0 %}
+    {% assign all_posts = all_posts | concat: site.air2016 %}
+{% endif %}
+{% assign all_posts = all_posts | sort: 'date' | reverse %}
 {% assign total_posts = all_posts.size %}
 {% assign total_pages = total_posts | divided_by: paginator.per_page | plus: 1 %}
 {% if total_pages > 1 %}

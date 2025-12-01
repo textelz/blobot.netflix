@@ -1,5 +1,9 @@
 <div class="posts" data-testid="blog-posts">
-    {% assign all_posts = site.posts | concat: site.test | sort: 'date' | reverse %}
+    {% assign all_posts = site.posts %}
+    {% if site.air2016 and site.air2016.size > 0 %}
+        {% assign all_posts = all_posts | concat: site.air2016 %}
+    {% endif %}
+    {% assign all_posts = all_posts | sort: 'date' | reverse %}
     {% assign start_index = paginator.page | minus: 1 | times: paginator.per_page %}
     {% assign end_index = start_index | plus: paginator.per_page | minus: 1 %}
     {% assign paginated_posts = all_posts | slice: start_index, paginator.per_page %}

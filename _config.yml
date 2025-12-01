@@ -38,7 +38,7 @@ collections:
   portfolio:
     output: true
     permalink: /:collection/:name
-  _2016:
+  air2016:
     output: true
     permalink: /:collection/:name
 

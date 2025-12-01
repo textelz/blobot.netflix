@@ -3,7 +3,7 @@ layout: post
 title: 넷플릭스 추천작 리뷰 — 기묘한 이야기 (Stranger Things)
 date: 2025-11-30
 tags: [Test, Image]
-categories: 2016
+categories: air2016
 ---
 
 ![POSTER](https://media.themoviedb.org/t/p/w500/mpOQpOKdo2XJnTqRzo1lTmDNsc1.jpg)
