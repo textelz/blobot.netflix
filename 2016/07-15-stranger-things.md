@@ -3,10 +3,10 @@ layout: post
 title: 넷플릭스 추천작 리뷰 — 기묘한 이야기 (Stranger Things)
 date: 2025-11-30
 tags: [Test, Image]
-categories: test
+categories: 2016
 ---
 
-![POSTER](https://media.themoviedb.org/t/p/w94_and_h141_bestv2/mpOQpOKdo2XJnTqRzo1lTmDNsc1.jpg)
+![POSTER](https://media.themoviedb.org/t/p/w500/mpOQpOKdo2XJnTqRzo1lTmDNsc1.jpg)
 
 
 # 넷플릭스 추천작 리뷰 — 기묘한 이야기 (Stranger Things)
@@ -20,7 +20,7 @@ categories: test
 - 시즌1 에피소드 수: 8부작
 - IMDb 평점: 8.6
 - 넷플릭스 평점(평균): 8.594 (투표수 18,970)
-- 홈페이지: ![link](https://www.netflix.com/title/80057281)
+- 홈페이지: [link](https://www.netflix.com/title/80057281)
 
 ## 어떤 이야기인가?
 
