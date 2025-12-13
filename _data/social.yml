@@ -7,7 +7,7 @@ feed:
 share:
   email: true
   facebook: true
-  linkedin: true
+  linkedin: false
   pinterest: true
   pocket:
   reddit: true
