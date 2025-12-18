@@ -3,7 +3,7 @@ layout: post
 title: 넷플릭스 필수 정주행 시리즈, '기묘한 이야기(Stranger Things)' 완벽 분석! 📺
 date: 2025-11-30
 tags: [기묘한이야기, StrangerThings, 넷플릭스추천, 넷플릭스시리즈, 미스터리드라마, SF스릴러, 넷플릭스오리지널, 미드추천, 시리즈리뷰]
-categories: air2016
+categories: posts_2016
 ---
 
 <p align="center">

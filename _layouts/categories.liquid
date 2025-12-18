@@ -12,11 +12,13 @@ layout: page
                 {% endfor %}
 
                 {% assign uncategorized_count = 0 %}
-                {% for post in site.posts %}
-                    {% if post.categories.size == 0 %}
-                        {% assign uncategorized_count = uncategorized_count | plus: 1 %}
-                    {% endif %}
-                {% endfor %}
+                {% if site.posts and site.posts.size > 0 %}
+                    {% for post in site.posts %}
+                        {% if post.categories.size == 0 %}
+                            {% assign uncategorized_count = uncategorized_count | plus: 1 %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
                 {% if uncategorized_count > 0 %}
                     <span class="separator"> / </span>
                     <a href="#uncategorized" class="category-link">Uncategorized</a> {{ uncategorized_count }}
@@ -61,11 +63,13 @@ layout: page
 
             <!-- Uncategorized posts -->
             {% assign uncategorized_posts = "" | split: "" %}
-            {% for post in site.posts %}
-                {% if post.categories.size == 0 %}
-                    {% assign uncategorized_posts = uncategorized_posts | push: post %}
-                {% endif %}
-            {% endfor %}
+            {% if site.posts and site.posts.size > 0 %}
+                {% for post in site.posts %}
+                    {% if post.categories.size == 0 %}
+                        {% assign uncategorized_posts = uncategorized_posts | push: post %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
 
             {% if uncategorized_posts.size > 0 %}
                 <div class="category-group">

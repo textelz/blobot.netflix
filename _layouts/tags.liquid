@@ -6,12 +6,14 @@ layout: page
 
     <!-- cycles through posts to get tags -->
     {% assign rawtags = "" %}
-    {% for post in site.posts %}
-    {% if post.tags.size > 0 %}
-    {% assign post_tags = post.tags | join:'|' | append:'|' %}
-    {% assign rawtags = rawtags | append:post_tags %}
+    {% if site.posts and site.posts.size > 0 %}
+        {% for post in site.posts %}
+        {% if post.tags.size > 0 %}
+        {% assign post_tags = post.tags | join:'|' | append:'|' %}
+        {% assign rawtags = rawtags | append:post_tags %}
+        {% endif %}
+        {% endfor %}
     {% endif %}
-    {% endfor %}
 
     <!-- cycles through portfolio collection to get tags -->
     {% assign portfolio = site.portfolio | map: 'tags' | join: ',' | split: ',' | uniq %}
@@ -57,18 +59,20 @@ layout: page
             {% endfor %}
 
             <!-- Posts -->
-            {% for post in site.posts %}
-            {% if post.tags contains tag %}
-            <h5 class="tag-title">
-                <a href="{{ post.url | relative_url }}">
-                    <i class="far fa-file-alt" aria-hidden="true"></i>
-                    {{ post.title }}
-                </a>
+            {% if site.posts and site.posts.size > 0 %}
+                {% for post in site.posts %}
+                {% if post.tags contains tag %}
+                <h5 class="tag-title">
+                    <a href="{{ post.url | relative_url }}">
+                        <i class="far fa-file-alt" aria-hidden="true"></i>
+                        {{ post.title }}
+                    </a>
 
-                {% include blog/post_info.liquid date=post.date %}
-            </h5>
+                    {% include blog/post_info.liquid date=post.date %}
+                </h5>
+                {% endif %}
+                {% endfor %}
             {% endif %}
-            {% endfor %}
 
             <!-- Portfolio -->
             {% for note in site.portfolio %}

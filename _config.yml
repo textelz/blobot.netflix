@@ -4,8 +4,8 @@ url: "https://textelz.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
 title: Netflix on Blobot                                # site's title
-description: "A website with blog posts and pages"      # used by search engines
-avatar: assets/img/textelz.png                         # Empty for no avatar in navbar
+description: "넷플릭스 콘텐츠 해외 리뷰 & 평점 가이드"           # used by search engines
+avatar: assets/img/textelz.png                          # Empty for no avatar in navbar
 favicon: assets/favicon.ico                             # Icon displayed in the tab
 
 # Header and footer text
@@ -13,7 +13,7 @@ header_text: 넷플릭스 콘텐츠 해외 리뷰 & 평점 가이드            
 header_feature_image: assets/img/header/triangular.jpeg
 header_feature_image_responsive: true
 footer_text: >
-  Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
+  Powered by Textelz
 
 # Blog
 excerpt: true                                           # Or "truncate" (first 250 characters), "false" to disable
@@ -32,12 +32,30 @@ color_theme: auto                                       # auto, dark or light
 # PAGINATION
 paginate: 5
 paginate_path: "/blog/page:num"
+future: true
 
-# PORTFOLIO
+# POSTS
 collections:
-  air2016:
+  posts_2016:
     output: true
     permalink: /:collection/:name
+  posts_2017:
+    output: true
+    permalink: /:collection/:name
+  posts_2018:
+    output: true
+    permalink: /:collection/:name
+  posts_2019:
+    output: true
+    permalink: /:collection/:name
+  posts_2020:
+    output: true
+    permalink: /:collection/:name
+
+# _posts 하위 폴더도 인식하도록 설정
+include:
+  - _posts/posts_2016
+  - _posts/posts_2020
 
 # BUILD SETTINGS
 sass:

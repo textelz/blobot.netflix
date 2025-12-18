@@ -1,12 +1,31 @@
 <div class="posts" data-testid="blog-posts">
-    {% assign all_posts = site.posts %}
-    {% if site.air2016 and site.air2016.size > 0 %}
-        {% assign all_posts = all_posts | concat: site.air2016 %}
+    {% assign all_posts = '' | split: '' %}
+    {% comment %} 먼저 _posts의 모든 파일 포함 (하위 폴더 포함) {% endcomment %}
+    {% if site.posts and site.posts.size > 0 %}
+        {% assign all_posts = site.posts %}
     {% endif %}
+    {% comment %} 그 다음 컬렉션들 추가 {% endcomment %}
+    {% for collection in site.collections %}
+        {% unless collection.label == 'posts' or collection.label == 'data' or collection.label == 'portfolio' %}
+            {% assign collection_docs = site[collection.label] %}
+            {% if collection_docs and collection_docs.size > 0 %}
+                {% if all_posts.size > 0 %}
+                    {% assign all_posts = all_posts | concat: collection_docs %}
+                {% else %}
+                    {% assign all_posts = collection_docs %}
+                {% endif %}
+            {% endif %}
+        {% endunless %}
+    {% endfor %}
     {% assign all_posts = all_posts | sort: 'date' | reverse %}
-    {% assign start_index = paginator.page | minus: 1 | times: paginator.per_page %}
-    {% assign end_index = start_index | plus: paginator.per_page | minus: 1 %}
-    {% assign paginated_posts = all_posts | slice: start_index, paginator.per_page %}
+    {% assign per_page = paginator.per_page | default: site.paginate | default: 5 %}
+    {% if per_page > 0 %}
+        {% assign start_index = paginator.page | minus: 1 | times: per_page %}
+        {% assign end_index = start_index | plus: per_page | minus: 1 %}
+        {% assign paginated_posts = all_posts | slice: start_index, per_page %}
+    {% else %}
+        {% assign paginated_posts = all_posts %}
+    {% endif %}
     {% unless paginated_posts.size > 0 %}
     <article><section class="post-content"><p>There are no blog posts</p></section></article>
     {% endunless %}

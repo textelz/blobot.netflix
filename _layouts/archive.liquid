@@ -4,7 +4,25 @@ layout: page
 
 <div class="home">
     <div id="archive">
-        {% assign postsByYear = site.posts | group_by_exp:"post", "post.date | date: '%Y'"  %}
+        {% assign all_posts = '' | split: '' %}
+        {% comment %} 먼저 _posts의 모든 파일 포함 (하위 폴더 포함) {% endcomment %}
+        {% if site.posts and site.posts.size > 0 %}
+            {% assign all_posts = site.posts %}
+        {% endif %}
+        {% comment %} 그 다음 컬렉션들 추가 {% endcomment %}
+        {% for collection in site.collections %}
+            {% unless collection.label == 'posts' or collection.label == 'data' or collection.label == 'portfolio' %}
+                {% assign collection_docs = site[collection.label] %}
+                {% if collection_docs and collection_docs.size > 0 %}
+                    {% if all_posts.size > 0 %}
+                        {% assign all_posts = all_posts | concat: collection_docs %}
+                    {% else %}
+                        {% assign all_posts = collection_docs %}
+                    {% endif %}
+                {% endif %}
+            {% endunless %}
+        {% endfor %}
+        {% assign postsByYear = all_posts | group_by_exp:"post", "post.date | date: '%Y'"  %}
         <ul class="archive-clouds">
             {% for year in postsByYear %}
                 <a href="#archive-{{ year.name | cgi_escape }}" class="archive-anchor">
