@@ -35,22 +35,10 @@ paginate_path: "/blog/page:num"
 future: true
 
 # POSTS
-collections:
-  posts_2016:
-    output: true
-    permalink: /:collection/:name
-  posts_2017:
-    output: true
-    permalink: /:collection/:name
-  posts_2018:
-    output: true
-    permalink: /:collection/:name
-  posts_2019:
-    output: true
-    permalink: /:collection/:name
-  posts_2020:
-    output: true
-    permalink: /:collection/:name
+# collections:
+  # posts_2016:
+  #   output: true
+  #   permalink: /:collection/:name
 
 # _posts 하위 폴더도 인식하도록 설정
 include:
