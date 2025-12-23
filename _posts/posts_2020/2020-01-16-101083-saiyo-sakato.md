@@ -28,7 +28,6 @@ categories: air2020
 -----
 
 <p align="center">
-  <img src="" alt="STILL"/>
 </p>
 
 <br>
