@@ -42,8 +42,8 @@ future: true
 
 # _posts 하위 폴더도 인식하도록 설정
 include:
-  - _posts/posts_2016
-  - _posts/posts_2020
+  - _posts/posts_2010
+
 
 # BUILD SETTINGS
 sass:
