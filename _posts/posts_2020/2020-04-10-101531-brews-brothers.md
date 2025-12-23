@@ -35,7 +35,7 @@ categories: air2020
 
 ### 영화 리뷰 사이트 평점
 
-작품에 대한 평가는 전반적으로 긍정적이며, 플랫폼별 평점은 아래와 같습니다.
+작품에 대한 평가는 전반적으로 보통이며, 플랫폼별 평점은 아래와 같습니다.
 
 <table>
     <tr style="background-color: #4a4a4a; color: white;">
