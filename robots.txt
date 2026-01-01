@@ -1,0 +1,15 @@
+# robots.txt
+
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+
+# Disallow admin and private directories
+Disallow: /_site/
+Disallow: /.jekyll-cache/
+Disallow: /.jekyll-metadata/
+Disallow: /.github/
+
+# Sitemap location
+Sitemap: https://textelz.github.io/blobot.netflix/sitemap.xml
+
