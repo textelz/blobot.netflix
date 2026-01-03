@@ -8,5 +8,5 @@ gem 'kramdown-parser-gfm'
 gem 'jekyll-sitemap'
 
 # For github pages compatibility
-gem 'github-pages', group: :jekyll_plugins
+# gem 'github-pages', group: :jekyll_plugins
 gemspec
