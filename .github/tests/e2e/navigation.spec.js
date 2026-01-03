@@ -4,7 +4,7 @@ const { openMobileMenu } = require('./helpers');
 test.describe('Navigation and Routing @desktop', () => {
   test('should load home page successfully', async ({ page }) => {
     await page.goto('/');
-    await expect(page).toHaveTitle(/Type on Strap/);
+    await expect(page).toHaveTitle('Netflix on Blobot | 넷플릭스 콘텐츠 해외 리뷰 & 평점 가이드');
   });
 
   test('should navigate to about page', async ({ page }) => {
