@@ -10,8 +10,9 @@
       {% endif %}
 
       {% for tag in tags %}
-        <li><a class="button" data-testid="tag-link" href="{% unless 'Tags' == page.title %}{{ site.baseurl }}/tags{% endunless %}#{{ tag | cgi_escape }}">
-          <p><i class="fas fa-tag fa-fw fa-sm"></i> {{ tag }}</p>
+        {% assign tag_str = tag | append: '' %}
+        <li><a class="button" data-testid="tag-link" href="{% unless 'Tags' == page.title %}{{ site.baseurl }}/tags{% endunless %}#{{ tag_str | cgi_escape }}">
+          <p><i class="fas fa-tag fa-fw fa-sm"></i> {{ tag_str }}</p>
         </a></li>
       {% endfor %}
     </ul>

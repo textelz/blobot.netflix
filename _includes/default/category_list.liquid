@@ -10,8 +10,9 @@
       {% endif %}
 
       {% for category in categories %}
-        <li><a class="button" data-testid="category-link" href="{{ site.baseurl }}/categories#{{ category | cgi_escape }}">
-          <p><i class="fas fa-folder fa-fw fa-sm"></i> {{ category }}</p>
+        {% assign category_str = category | append: '' %}
+        <li><a class="button" data-testid="category-link" href="{{ site.baseurl }}/categories#{{ category_str | cgi_escape }}">
+          <p><i class="fas fa-folder fa-fw fa-sm"></i> {{ category_str }}</p>
         </a></li>
       {% endfor %}
     </ul>

@@ -36,8 +36,9 @@ layout: page
     <!-- Displays the posts and pages that contains the tag-->
     <div class="posts">
         {% for tag in tags %}
-        <h3 id="{{ tag | cgi_escape }}" class="tag-anchor">
-            <a href="#{{ tag | cgi_escape }}"><i class="fas fa-tag fa-fw fa-sm"></i> {{ tag }}</a>
+            {% assign tag_str = tag | append: '' %}
+        <h3 id="{{ tag_str | cgi_escape }}" class="tag-anchor">
+            <a href="#{{ tag_str | cgi_escape }}"><i class="fas fa-tag fa-fw fa-sm"></i> {{ tag_str }}</a>
             <a href="#{{ page.title }}" style="float: right"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"> </i> </a>
 
         </h3>
