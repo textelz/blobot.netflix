@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "~> 3.1.0"
+ruby "~> 3.4.2"
 
 # Should be included in Jekyll but depending on the version Jekyll and Ruby version, it may not be included
 gem 'webrick'
