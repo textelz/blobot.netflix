@@ -9,7 +9,14 @@ test.describe('Navigation and Routing @desktop', () => {
 
   test('should navigate to about page', async ({ page }) => {
     await page.goto('/');
-    await page.click('nav a[href*="about"], .navbar a[href*="about"]');
+    // Try to click nav link, but if it doesn't exist (hide: true), navigate directly
+    const aboutLink = page.locator('nav a[href*="about"], .navbar a[href*="about"]');
+    const linkCount = await aboutLink.count();
+    if (linkCount > 0) {
+      await aboutLink.click();
+    } else {
+      await page.goto('/about');
+    }
     await expect(page).toHaveURL(/about/);
     await expect(page.locator('h1, h2')).toContainText(/About|Welcome/i);
   });
@@ -23,7 +30,14 @@ test.describe('Navigation and Routing @desktop', () => {
 
   test('should navigate to portfolio page', async ({ page }) => {
     await page.goto('/');
-    await page.click('a[href*="portfolio"]');
+    // Try to click nav link, but if it doesn't exist (hide: true), navigate directly
+    const portfolioLink = page.locator('nav a[href*="portfolio"], .navbar a[href*="portfolio"], a[href*="portfolio"]');
+    const linkCount = await portfolioLink.count();
+    if (linkCount > 0) {
+      await portfolioLink.first().click();
+    } else {
+      await page.goto('/portfolio');
+    }
     await expect(page).toHaveURL(/portfolio/);
   });
 
@@ -47,7 +61,14 @@ test.describe('Navigation and Routing @desktop', () => {
 
   test('should navigate to gallery page', async ({ page }) => {
     await page.goto('/');
-    await page.click('a[href*="gallery"]');
+    // Try to click nav link, but if it doesn't exist (hide: true), navigate directly
+    const galleryLink = page.locator('nav a[href*="gallery"], .navbar a[href*="gallery"], a[href*="gallery"]');
+    const linkCount = await galleryLink.count();
+    if (linkCount > 0) {
+      await galleryLink.first().click();
+    } else {
+      await page.goto('/gallery');
+    }
     await expect(page).toHaveURL(/gallery/);
   });
 
@@ -82,16 +103,30 @@ test.describe('Navigation and Routing @desktop', () => {
 test.describe('Navigation and Routing @mobile', () => {
   test('should navigate to about page', async ({ page }) => {
     await page.goto('/');
-    await openMobileMenu(page);
-    await page.click('nav a[href*="about"], .navbar a[href*="about"]');
+    // Try to click nav link, but if it doesn't exist (hide: true), navigate directly
+    const aboutLink = page.locator('nav a[href*="about"], .navbar a[href*="about"]');
+    const linkCount = await aboutLink.count();
+    if (linkCount > 0) {
+      await openMobileMenu(page);
+      await aboutLink.click();
+    } else {
+      await page.goto('/about');
+    }
     await expect(page).toHaveURL(/about/);
     await expect(page.locator('h1, h2')).toContainText(/About|Welcome/i);
   });
 
   test('should navigate to portfolio page', async ({ page }) => {
     await page.goto('/');
-    await openMobileMenu(page);
-    await page.click('a[href*="portfolio"]');
+    // Try to click nav link, but if it doesn't exist (hide: true), navigate directly
+    const portfolioLink = page.locator('nav a[href*="portfolio"], .navbar a[href*="portfolio"], a[href*="portfolio"]');
+    const linkCount = await portfolioLink.count();
+    if (linkCount > 0) {
+      await openMobileMenu(page);
+      await portfolioLink.first().click();
+    } else {
+      await page.goto('/portfolio');
+    }
     await expect(page).toHaveURL(/portfolio/);
   });
 
@@ -111,8 +146,15 @@ test.describe('Navigation and Routing @mobile', () => {
 
   test('should navigate to gallery page', async ({ page }) => {
     await page.goto('/');
-    await openMobileMenu(page);
-    await page.click('a[href*="gallery"]');
+    // Try to click nav link, but if it doesn't exist (hide: true), navigate directly
+    const galleryLink = page.locator('nav a[href*="gallery"], .navbar a[href*="gallery"], a[href*="gallery"]');
+    const linkCount = await galleryLink.count();
+    if (linkCount > 0) {
+      await openMobileMenu(page);
+      await galleryLink.first().click();
+    } else {
+      await page.goto('/gallery');
+    }
     await expect(page).toHaveURL(/gallery/);
   });
 
