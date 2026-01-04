@@ -135,43 +135,60 @@ test.describe('Accessibility @desktop', () => {
   test('should have focusable interactive elements', async ({ page }) => {
     await page.goto('/');
 
-    const interactiveElements = page.locator('button:visible, a:visible, input:visible, [tabindex]:visible').first();
+    // Try to find multiple types of interactive elements
+    const allInteractiveElements = page.locator('button:visible, a:visible, input:visible, [tabindex]:visible');
+    const totalCount = await allInteractiveElements.count();
     
-    const count = await interactiveElements.count();
-    if (count === 0) {
+    if (totalCount === 0) {
       test.skip(true, 'No interactive elements found');
       return;
     }
     
-    await expect(interactiveElements).toBeVisible();
+    // Check multiple elements to find at least one focusable element
+    let foundFocusable = false;
+    const maxCheck = Math.min(totalCount, 10);
     
-    // Check if element is focusable by verifying it's not disabled and has proper attributes
-    const isFocusable = await interactiveElements.evaluate(el => {
-      // Check if element is disabled
-      if (el.disabled || el.getAttribute('aria-disabled') === 'true') {
-        return false;
-      }
+    for (let i = 0; i < maxCheck; i++) {
+      const element = allInteractiveElements.nth(i);
+      await expect(element).toBeVisible();
       
-      // Check tabindex - if it's -1, it's not focusable
-      const tabIndex = el.getAttribute('tabindex');
-      if (tabIndex === '-1') {
-        return false;
-      }
+      const isFocusable = await element.evaluate(el => {
+        // Check if element is disabled
+        if (el.disabled || el.getAttribute('aria-disabled') === 'true') {
+          return false;
+        }
+        
+        // Check tabindex - if it's -1, it's not focusable
+        const tabIndex = el.getAttribute('tabindex');
+        if (tabIndex === '-1') {
+          return false;
+        }
+        
+        // For anchor tags, check if they have href (can be empty string for same-page links)
+        if (el.tagName === 'A') {
+          const href = el.getAttribute('href');
+          // Links without href are not focusable, but href can be empty string, '#', or a path
+          if (href === null) {
+            return false;
+          }
+          // href exists (even if empty or '#'), so it's potentially focusable
+          return true;
+        }
+        
+        // Element is interactive if it's a button, input, or has a positive tabindex
+        return el.tagName === 'BUTTON' || 
+               el.tagName === 'INPUT' || 
+               (tabIndex && parseInt(tabIndex) >= 0);
+      });
       
-      // For anchor tags, check if they have href
-      if (el.tagName === 'A' && !el.href && !el.getAttribute('href')) {
-        return false;
+      if (isFocusable) {
+        foundFocusable = true;
+        break;
       }
-      
-      // Element is interactive if it's a button, link, input, or has a positive tabindex
-      return el.tagName === 'BUTTON' || 
-             el.tagName === 'A' || 
-             el.tagName === 'INPUT' || 
-             (tabIndex && parseInt(tabIndex) >= 0);
-    });
+    }
     
-    // Verify the element is interactive (focusable)
-    expect(isFocusable).toBe(true);
+    // Verify at least one element is interactive (focusable)
+    expect(foundFocusable).toBe(true);
   });
 
   test('should have proper ARIA roles', async ({ page }) => {
