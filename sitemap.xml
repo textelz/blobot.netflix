@@ -23,18 +23,12 @@ layout: null
   {% for post in all_posts %}
     <url>
       <loc>{{ site.url }}{{ site.baseurl }}{{ post.url }}</loc>
-      <lastmod>{{ post.date | date: "%Y-%m-%d" }}</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.8</priority>
     </url>
   {% endfor %}
   {% for page in site.pages %}
     {% unless page.excluded or page.hide %}
       <url>
         <loc>{{ site.url }}{{ site.baseurl }}{{ page.url }}</loc>
-        <lastmod>{% if page.last_modified %}{{ page.last_modified | date: "%Y-%m-%d" }}{% else %}{{ page.date | date: "%Y-%m-%d" }}{% endif %}</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>{% if page.url == '/' %}1.0{% else %}0.6{% endif %}</priority>
       </url>
     {% endunless %}
   {% endfor %}
